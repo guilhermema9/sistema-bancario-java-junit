@@ -101,9 +101,7 @@ public class Conta implements Cadastro {
      * @return
      */
     public double getSaldoTotal() {
-        /* TODO: Você precisa implementar este método. 
-        A linha abaixo deve ser substituída pelo seu código */
-        return 0.0;
+        return saldo + limite;
     }
 
     /**
@@ -136,7 +134,12 @@ public class Conta implements Cadastro {
      * @param valor valor a ser depositado (deve ser um valor positivo)
      */
     public void depositoDinheiro(final double valor) {
-        // TODO: Você precisa implementar este método
+        Movimentacao movimentacao = new Movimentacao(this);
+        movimentacao.setConfirmada(true);
+        movimentacao.setTipo('C');
+        movimentacao.setValor(valor);
+        saldo += valor;
+        movimentacoes.add(movimentacao);
     }
 
     /**
@@ -146,7 +149,11 @@ public class Conta implements Cadastro {
      * @param valor valor a ser depositado (deve ser um valor positivo)
      */
     public void depositoCheque(final double valor) {
-        // TODO: Você precisa implementar este método
+        Movimentacao movimentacao = new Movimentacao(this);
+        movimentacao.setConfirmada(false);
+        movimentacao.setTipo('C');
+        movimentacao.setValor(valor);
+        movimentacoes.add(movimentacao);
     }
 
     @Override
@@ -164,7 +171,11 @@ public class Conta implements Cadastro {
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        if(numero.matches("\\d{5}-\\d")){
+            this.numero = numero;
+        }else{
+            throw new IllegalArgumentException("Número da conta deve estar no formato 12345-6");
+        }
     }
 
     public boolean isPoupanca() {
@@ -192,6 +203,13 @@ public class Conta implements Cadastro {
     }
 
     public void setLimite(double limite) {
+        /*if (!especial){
+            throw new IllegalStateException("Somente contas especiais podem ter limite");
+        }*/
         this.limite = limite;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 }

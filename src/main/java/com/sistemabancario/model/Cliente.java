@@ -11,7 +11,6 @@ package com.sistemabancario.model;
 public class Cliente implements Cadastro {
 
     private long id;
-
     /**
      * CPF que é uma das formas de permitir representar o cliente unicamente.
      * 
@@ -22,7 +21,6 @@ public class Cliente implements Cadastro {
      *          Ao setar o CPF, deve-se utilizar o método {@link #isCpfValido(String)}
      *          para verificar se o CPF é válido ou não. Se for inválido, o valor não deve
      *          ser armazenado e deve-se lançar uma exceção com a mensagem "CPF inválido".
-     * 
      *          (R02)
      *      </li>
      * <ul>
@@ -55,6 +53,7 @@ public class Cliente implements Cadastro {
      * </ul>
      */
     private String nome;
+
 
     @Override
     public long getId() {
@@ -105,6 +104,7 @@ public class Cliente implements Cadastro {
     public boolean isCpfValido(String cpf) {
         // Remove caracteres não numéricos do CPF
         cpf = cpf.replaceAll("\\D", "");
+        cpf = cpf.replaceAll("\\d\\d\\d\\d-\\d", "");
 
         if (cpf.length() != 11) {
             return false;

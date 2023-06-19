@@ -1,6 +1,9 @@
 package com.sistemabancario.model;
 
 import org.junit.jupiter.api.Test;
+
+import java.security.spec.KeySpec;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -61,6 +64,14 @@ class MovimentacaoTest {
         final Movimentacao instance = new Movimentacao(new Conta());
         final String espacosEmBranco = "           ";
         assertThrows(IllegalArgumentException.class, () -> instance.setDescricao(espacosEmBranco));
+    }
+
+    @Test
+    void testR00SetDescricaoValida() {
+        final Movimentacao instance = new Movimentacao(new Conta());
+        final String esperado = "Saque Caixa Eletrônico";
+        instance.setDescricao(esperado);
+        assertEquals(esperado, instance.getDescricao());
     }
 
 }

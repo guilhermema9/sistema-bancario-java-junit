@@ -66,7 +66,7 @@ public class Movimentacao implements Cadastro {
      * @param conta a {@link Conta} para vincular a movimentação.
      */
     public Movimentacao(Conta conta){
-        // TODO: Você precisa implementar este método
+        this.conta = conta;
     }
 
     @Override

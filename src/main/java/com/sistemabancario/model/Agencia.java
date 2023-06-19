@@ -52,6 +52,10 @@ public class Agencia implements Cadastro {
      */
     private String numero;
 
+    public Agencia(Banco banco) {
+        this.banco = banco;
+    }
+
     @Override
     public long getId() {
         // TODO: Você precisa implementar este método
@@ -74,6 +78,18 @@ public class Agencia implements Cadastro {
      * @param numero novo número da agência
      */
     public void setNumero(String numero) {
-        this.numero = numero;
+        if(numero.matches("\\d{4}-\\d")){
+            this.numero = numero;
+        }else{
+            throw new IllegalArgumentException("Número da agência deve estar no formato 1234-5");
+        }
+    }
+
+    public Banco getBanco() {
+        return banco;
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
     }
 }
